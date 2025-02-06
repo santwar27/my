@@ -18,6 +18,7 @@
             border-radius: 15px;
             box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
             display: inline-block;
+            position: relative;
         }
         h1 {
             color: #ff3366;
@@ -33,6 +34,25 @@
             color: white;
             text-decoration: none;
             border-radius: 5px;
+            cursor: pointer;
+            position: relative;
+            overflow: hidden;
+        }
+        .heart-animation {
+            position: absolute;
+            font-size: 20px;
+            color: red;
+            animation: floatUp 1s ease-out forwards;
+        }
+        @keyframes floatUp {
+            0% {
+                opacity: 1;
+                transform: translateY(0);
+            }
+            100% {
+                opacity: 0;
+                transform: translateY(-50px);
+            }
         }
     </style>
 </head>
@@ -45,7 +65,23 @@
         <p><strong>Time:</strong> 7:30 PM</p>
         <p><strong>Place:</strong> Ristorante Italiano Pomodoro</p>
         <p>Looking forward to spending this romantic evening with you! 💕</p>
-        <a href="#" class="button">Accept Invitation</a>
+        <button class="button" onclick="acceptInvitation(event)">Accept Invitation</button>
     </div>
+    <script>
+        function acceptInvitation(event) {
+            const button = event.target;
+            const container = document.querySelector('.container');
+            for (let i = 0; i < 5; i++) {
+                let heart = document.createElement('div');
+                heart.classList.add('heart-animation');
+                heart.innerHTML = '❤️';
+                heart.style.left = `${Math.random() * 100}px`;
+                heart.style.top = `-10px`;
+                container.appendChild(heart);
+                setTimeout(() => heart.remove(), 1000);
+            }
+            alert('Invitation Accepted!');
+        }
+    </script>
 </body>
 </html>
